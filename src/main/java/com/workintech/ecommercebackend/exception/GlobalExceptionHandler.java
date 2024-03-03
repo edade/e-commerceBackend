@@ -2,6 +2,7 @@ package com.workintech.ecommercebackend.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -21,5 +22,11 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleException(Exception exception) {
         ErrorResponse exceptionResponse = new ErrorResponse(exception.getMessage(), Instant.now());
         return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Object> handleValidationExceptions(MethodArgumentNotValidException ex) {
+        String defaultMessage = ex.getBindingResult().getFieldError().getDefaultMessage();
+        return new ResponseEntity<>(defaultMessage, HttpStatus.BAD_REQUEST);
     }
 }

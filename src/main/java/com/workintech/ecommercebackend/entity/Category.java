@@ -3,6 +3,7 @@ package com.workintech.ecommercebackend.entity;
 import jakarta.persistence.*;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,6 +32,7 @@ public class Category {
     @Column(name = "image")
     private String image;
     @NotBlank(message = "Gender section must not be blank")
+    @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ]+$", message = "Gender must not contain digits")
     @Column(name = "gender")
     private String gender;
 
