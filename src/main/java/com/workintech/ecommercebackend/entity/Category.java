@@ -36,16 +36,16 @@ public class Category {
     @Column(name = "gender")
     private String gender;
 
-//    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-//    private List<Product> productList;
-//
-//    public void addProduct(Product product) {
-//        if (productList == null) {
-//            productList = new ArrayList<>();
-//        }
-//        productList.add(product);
-//    }
-//
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    private List<Product> productList;
+
+    public void addProduct(Product product) {
+        if (productList == null) {
+            productList = new ArrayList<>();
+        }
+        productList.add(product);
+    }
+
 
 
 
