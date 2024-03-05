@@ -1,5 +1,6 @@
 package com.workintech.ecommercebackend.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,6 +24,7 @@ public class Role implements GrantedAuthority {
     private String authority;
 
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<User> userList;
 
     public void addUser(User user){
