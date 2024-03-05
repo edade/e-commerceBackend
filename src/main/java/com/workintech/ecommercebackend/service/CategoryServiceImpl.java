@@ -29,6 +29,15 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public Category findByIdOriginal(Long id) {
+        Optional<Category> categoryOptional = categoryRepository.findById(id);
+        if (categoryOptional.isPresent()) {
+            return categoryOptional.get();
+        }
+        throw new CategoryException("Category is not found with given id: " + id, HttpStatus.NOT_FOUND);
+    }
+
+    @Override
     public CategoryResponseDto findById(long id) {
         Optional<Category> categoryOptional = categoryRepository.findById(id);
         if(categoryOptional.isPresent()){
@@ -38,6 +47,7 @@ public class CategoryServiceImpl implements CategoryService {
         throw new CategoryException("Category is not found with given id: " + id, HttpStatus.NOT_FOUND);
 
     }
+
 
     @Override
     public CategoryResponseDto save(Category category) {
