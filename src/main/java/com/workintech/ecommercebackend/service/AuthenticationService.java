@@ -35,7 +35,7 @@ public class AuthenticationService {
         user.setName(name);
         user.setEmail(email);
         user.setPassword(encodedPassword);
-        Role defaultRole = roleRepository.findByAuthority("USER").orElseThrow(() -> new EcommerceException("Default role not found", HttpStatus.INTERNAL_SERVER_ERROR));
+        Role defaultRole = roleRepository.findByAuthority("USER").orElseThrow(() -> new EcommerceException("Default role not found", HttpStatus.BAD_REQUEST));
         user.setRole(optionalRole.orElse(defaultRole));
 
         return userRepository.save(user);

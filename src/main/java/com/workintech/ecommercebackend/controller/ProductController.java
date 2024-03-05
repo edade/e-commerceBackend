@@ -26,6 +26,11 @@ public class ProductController {
         return productService.save(categoryId, product);
     }
 
+    @GetMapping("/{id}")
+    public ProductResponseDto getProductById(@PathVariable Long id) {
+        return productService.findById(id);
+    }
+
     @DeleteMapping("/{id}")
     public ProductResponseDto deleteCategory(@PathVariable long id) {
         return productService.remove(id);
